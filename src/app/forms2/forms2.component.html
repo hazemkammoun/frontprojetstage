@@ -1,0 +1,45 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Formulaires et Procédures internes du CNSTN</h2>
+  </div>
+  <div class="panel-body">
+    <input type="text" name="searchText" [(ngModel)]="searchText" placeholder="Rechercher..." class="search-input">
+    <table id="myTable">
+      <thead>
+        <tr>
+          <th>Procédure</th>
+          <th>Num</th>
+          <th>Nom du formulaire</th>
+          <th>Code</th>
+          <th>Revision</th>
+          <th>Date d'application</th>
+          <th>Pièce jointe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let procedure of procedures; let i = index">
+          <tr *ngFor="let formulaire of procedure.formulaires | filter: searchText; let j = index">
+            <ng-container *ngIf="j === 0">
+              <td [attr.rowspan]="procedure.formulaires.length">{{ procedure.nom }}</td>
+            </ng-container>
+            <td>{{ formulaire.id }}</td>
+            <td>{{ formulaire.nomforms }}</td>
+            <td>{{ formulaire.code }}</td>
+            <td>{{ formulaire.revision }}</td>
+            <td>{{ formulaire.date_d_application }}</td>
+            
+            <td>
+              
+<!--                 <a [href]="src+formulaire.lien">{{ formulaire.nomforms }}</a>
+ -->        
+ <a [href]="'../../assets/doc/' + formulaire.lien" target="_blank" class="btn btn-primary btn-sm">
+  Télécharger
+  </a>
+</td>
+</tr>
+</ng-container>
+</tbody>
+</table>
+</div>
+
+

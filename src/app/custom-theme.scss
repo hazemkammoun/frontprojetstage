@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+// Define your custom warn color
+$custom-warn: mat-palette($mat-red);
+
+// Create a custom theme using the warn color
+$custom-theme: mat-light-theme($custom-warn);
+
+// Include the custom theme
+@include angular-material-theme($custom-theme);

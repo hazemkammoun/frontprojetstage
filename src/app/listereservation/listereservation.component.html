@@ -1,0 +1,137 @@
+<div class="container-fluid">
+  <div class="panel panel-primary">
+    <div class="panel-heading text-center">
+      <h3>LISTE DES RÉSERVATIONS</h3>
+    </div>
+    <div class="panel-body">
+      <table class="table table-bordered text-center" *ngIf="!mybolean">
+        <thead>
+          <tr class="success">
+            <th class="text-center">id</th>
+            <th class="text-center">typemeeting</th>
+            <th class="text-center">date_du_résrvation</th>
+            <th class="text-center">date_fin</th>
+            <th class="text-center">demandeur</th>
+            <th class="text-center">salle</th>
+            <th class="text-center">Suppression</th>
+            <th class="text-center">Mise à jour</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let monreserv of  mesreservation">
+            <td>{{monreserv.id}}</td>
+            <td>{{monreserv.typemeeting}}</td>
+            <td>{{monreserv.date_du_resrvation}}</td>
+            <td>{{monreserv.date_fin}}</td>
+            <td>{{monreserv.utilisateur?.nom}}</td>
+            <td>{{monreserv.salle?.nom}}</td>
+            <td><button mat-raised-button color="warn" (click)="deletreservationbyid(monreserv.id)">Suppression</button></td>
+            <td><button mat-raised-button color="primary" (click)="reservationDetails(monreserv.id)">Mise à jour</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="panel panel-success" *ngIf="mybolean2">
+        <div class="panel-heading text-center">
+          <h3>Modification</h3>
+        </div>
+        <div class="panel-body">
+          <div class="container">
+            <!-- Champs pour la mise à jour -->
+            <form (ngSubmit)="Update()" #form="ngForm">
+              <div class="form-group">
+                <label for="nom">Nom:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nom"
+                  placeholder="Entrez votre nom"
+                  name="nom"
+                  [(ngModel)]="reservationupdate.typemeeting"
+                  required
+                  minlength="2"
+                  maxlength="30"
+                  #nom="ngModel">
+                <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+                  <div *ngIf="nom.errors?.['required']">Ce champ est obligatoire.</div>
+                  <div *ngIf="nom.errors?.['minlength']">Ce champ doit comporter au moins 2 caractères.</div>
+                  <div *ngIf="nom.errors?.['maxlength']">Ce champ ne doit pas dépasser 30 caractères.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="date_du_resrvation">Date du réservation:</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="date_du_resrvation"
+                  placeholder="Entrez votre date du réservation"
+                  name="date_du_resrvation"
+                  [(ngModel)]="reservationupdate.date_du_resrvation"
+                  required
+                  minlength="2"
+                  maxlength="30"
+                  #date_du_resrvation="ngModel">
+                <div *ngIf="date_du_resrvation.invalid && (date_du_resrvation.dirty || date_du_resrvation.touched)" class="text-danger">
+                  <div *ngIf="date_du_resrvation.errors?.['required']">Ce champ est obligatoire.</div>
+                  <div *ngIf="date_du_resrvation.errors?.['minlength']">Ce champ doit comporter au moins 2 caractères.</div>
+                  <div *ngIf="date_du_resrvation.errors?.['maxlength']">Ce champ ne doit pas dépasser 30 caractères.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="date_fin">Date de fin:</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="date_fin"
+                  placeholder="Entrez votre date de fin"
+                  name="date_fin"
+                  [(ngModel)]="reservationupdate.date_fin"
+                  required
+                  minlength="2"
+                  maxlength="30"
+                  #date_fin="ngModel">
+                <div *ngIf="date_fin.invalid && (date_fin.dirty || date_fin.touched)" class="text-danger">
+                  <div *ngIf="date_fin.errors?.['required']">Ce champ est obligatoire.</div>
+                  <div *ngIf="date_fin.errors?.['minlength']">Ce champ doit comporter au moins 2 caractères.</div>
+                  <div *ngIf="date_fin.errors?.['maxlength']">Ce champ ne doit pas dépasser 30 caractères.</div>
+                </div>
+              </div>
+    
+              <!-- Ajoutez ici d'autres champs pour la mise à jour -->
+    
+
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="salle">Sélectionnez la salle:</label>
+                <div class="col-sm-10">
+                  <select id="salle" class="form-control" name="salle" [(ngModel)]="reservationupdate.salle">
+                    <option *ngFor="let s of messalles" [ngValue]="s">{{ s.nom }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="utilisateur">Sélectionnez votre nom:</label>
+                <div class="col-sm-10">
+                  <select id="utilisateur" class="form-control" name="utilisateur" [(ngModel)]="reservationupdate.utilisateur">
+                    <option *ngFor="let u of lesutilisateurs" [ngValue]="u">{{ u.nom }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Mettre à jour</button>
+              </div>
+              <div class="form-group">
+                <button type="submit" mat-raised-button color="warn" (click)="evaluatebolean2()">Annuler</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Tableau de liste des réservations -->
+ 
+
+
+</div>

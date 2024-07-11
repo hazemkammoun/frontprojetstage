@@ -1,0 +1,165 @@
+
+
+
+
+
+<div class="container-fluid">
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center">
+            <h3>LISTE DES DIRECTIONS</h3>
+        </div>
+        <div class="panel-body">
+            <mat-list>
+              
+                <td> <button mat-raised-button color="success" (click)="evaluatebolean()"><b>Ajouter une direction</b></button></td>
+                <mat-divider></mat-divider>
+                <mat-divider></mat-divider>
+                <mat-divider></mat-divider>
+            </mat-list>
+
+            <!-- Ajout d'une direction -->
+            <div class="container" *ngIf="mybolean">
+                <h2>Nouveau direction</h2>
+                <form class="form-horizontal" #userForm="ngForm"  (ngSubmit)="adddirec()" #addDirectionForm="ngForm">
+                    <div class="form-group">
+                        <label for="nom">Nom:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="nom"
+                            placeholder="Entrez le nom de la direction"
+                            name="nom"
+                            [(ngModel)]="newdirec.nom"
+                            required
+                            minlength="2"
+                            maxlength="30"
+                            #nom="ngModel"
+                        />
+                        <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+                            <div *ngIf="nom.errors?.['required']">Le nom est requis.</div>
+                            <div *ngIf="nom.errors?.['minlength']">Le nom doit comporter au moins 2 caractères.</div>
+                            <div *ngIf="nom.errors?.['maxlength']">Le nom ne doit pas dépasser 30 caractères.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="description"
+                            placeholder="Entrez la description de la direction"
+                            name="description"
+                            [(ngModel)]="newdirec.description"
+                            required
+                            minlength="5"
+                            maxlength="100"
+                            #description="ngModel"
+                        />
+                        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">
+                            <div *ngIf="description.errors?.['required']">La description est requise.</div>
+                            <div *ngIf="description.errors?.['minlength']">La description doit comporter au moins 5 caractères.</div>
+                            <div *ngIf="description.errors?.['maxlength']">La description ne doit pas dépasser 100 caractères.</div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" [disabled]="addDirectionForm.invalid">Ajouter</button>
+                </form>
+            </div>
+
+            <table class="table table-bordered text-center" *ngIf="!mybolean">
+                <thead>
+                    <tr class="success ">
+                        <th class="text-center">id</th>
+                        <th class="text-center">nom</th>
+                        <th class="text-center">description</th>
+                        <th class="text-center">Suppression</th>
+                        <th class="text-center">Mise à jour</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let mondirection of mesdirections">
+                        <td>{{mondirection.id}}</td>
+                        <td>{{mondirection.nom}}</td>
+                        <td>{{mondirection.description}}</td>
+                      
+                        <td>
+                            <button mat-raised-button color="warn" (click)="deletdirecbyid(mondirection.id)">Suppression</button>
+                        </td>
+                        <td>
+                            <button mat-raised-button color="primary" (click)="directionDetails(mondirection.id)">Mettre à jour</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Mise à jour d'une direction -->
+            <div class="panel panel-success" *ngIf="mybolean2">
+                <div class="panel-heading text-center">
+                    <h3>Modification</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="container">
+                        
+                        <form (ngSubmit)="Update()" #updateDirectionForm="ngForm">
+                            <div class="form-group">
+                                <label for="updateNom"><b>Nom:</b></label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="updateNom"
+                                    placeholder="Entrez le nouveau nom de la direction"
+                                    name="nom"
+                                    [(ngModel)]="mondirection.nom"
+                                    required
+                                    minlength="2"
+                                    maxlength="30"
+                                    #updateNom="ngModel"
+                                />
+                                <div *ngIf="updateNom.invalid && (updateNom.dirty || updateNom.touched)" class="text-danger">
+                                    <div *ngIf="updateNom.errors?.['required']">Le nom est requis.</div>
+                                    <div *ngIf="updateNom.errors?.['minlength']">Le nom doit comporter au moins 2 caractères.</div>
+                                    <div *ngIf="updateNom.errors?.['maxlength']">Le nom ne doit pas dépasser 30 caractères.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="updateDescription"><b>Description:</b></label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="updateDescription"
+                                    placeholder="Entrez la nouvelle description de la direction"
+                                    name="description"
+                                    [(ngModel)]="mondirection.description"
+                                    required
+                                    minlength="5"
+                                    maxlength="100"
+                                    #updateDescription="ngModel"
+                                />
+                                <div *ngIf="updateDescription.invalid && (updateDescription.dirty || updateDescription.touched)" class="text-danger">
+                                    <div *ngIf="updateDescription.errors?.['required']">La description est requise.</div>
+                                    <div *ngIf="updateDescription.errors?.['minlength']">La description doit comporter au moins 5 caractères.</div>
+                                    <div *ngIf="updateDescription.errors?.['maxlength']">La description ne doit pas dépasser 100 caractères.</div>
+                                </div>
+                            </div>
+
+                            <mat-list>
+                                <mat-divider></mat-divider>
+                               
+                              </mat-list>
+                                <button type="submit" class="btn btn-primary" [disabled]="updateDirectionForm.invalid">Mettre à jour</button>
+                                <mat-list>
+                                    <mat-divider></mat-divider>
+                                <button type="button" class="btn btn-danger" (click)="evaluatebolean2()">Annuler</button>
+                            </mat-list>
+                           
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+              

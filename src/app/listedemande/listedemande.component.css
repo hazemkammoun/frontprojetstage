@@ -1,0 +1,11 @@
+/* styles.css ou un fichier CSS lié à votre composant */
+.regle {
+    background-color: #d4edda; /* Vert pâle */
+}
+
+.non-regle {
+    background-color: #f8d7da; /* Rouge pâle */
+}
+.center {
+    text-align: center;
+  }

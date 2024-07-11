@@ -1,0 +1,16 @@
+
+.container {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.message {
+    background-color: #0e1222;
+    border: 1px solid #575555;
+    border-radius: 5px;
+    padding: 80px;
+    color: azure;
+}

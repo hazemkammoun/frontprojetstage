@@ -1,0 +1,7 @@
+export enum TypeEquipement {
+    ORDINATEUR = 'ORDINATEUR',
+    IMPRIMANTE = 'IMPRIMANTE',
+    PHOTOCOPIEUR = 'PHOTOCOPIEUR',
+    SCANNEUR = 'SCANNEUR'
+  }
+  

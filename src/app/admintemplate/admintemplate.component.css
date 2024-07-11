@@ -1,0 +1,46 @@
+.btn1 {
+  background-color: rgba(115, 115, 115, 0.5);
+  border: 1px solid #070a0e;
+  color: rgb(1, 0, 0);
+  padding: 16px 32px;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition: 0.3s;
+}
+
+.btn1:hover {
+  opacity: 0.8;
+}
+
+.navbar-brand {
+  padding: 0;
+}
+
+.navbar-brand > img {
+  height: 50px; /* Ajustez la hauteur selon vos besoins */
+  padding: 0;
+  width: auto; /* Maintient le ratio d'aspect de l'image */
+}
+
+.bg-img {
+  height: 160px; /* Hauteur de votre barre de navigation */
+  background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
+  background-position: center;
+  position: relative; /* Position relative pour positionner le logo */
+}
+
+.logo-container {
+  position: absolute;
+  top: 25px; /* Ajustez la position selon vos besoins */
+  left: 35px; /* Ajustez la position selon vos besoins */
+}
+
+.logo-tunisia {
+  height: 115px; /* Ajustez la hauteur selon vos besoins */
+  width: auto; /* Maintient le ratio d'aspect de l'image */
+}
+
+
+.content {
+  margin-top: 210px; /* Marge pour laisser de la place pour la barre de navigation */
+}

@@ -1,0 +1,53 @@
+.footer {
+  background-color: #00466c; /* Couleur bleu ciel */
+  padding: 20px 0; /* Réduction de la hauteur */
+  color: #fff;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer h4, .footer h5 {
+  margin-bottom: 10px; /* Réduction de l'espace en dessous des titres */
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0; /* Réduction de l'espace vertical */
+}
+
+.social-buttons .list-inline-item {
+  margin: 0 5px; /* Réduction de l'espace entre les icônes */
+}
+
+.social-buttons a {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  background-color: #fff;
+  color: #00466c;
+  border-radius: 50%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.social-buttons a:hover {
+  background-color: #add8e6;
+  color: #fff;
+}
+
+.footer p {
+  margin: 2px 0; /* Réduction de l'espace entre les paragraphes */
+  font-size: 0.9em; /* Taille de police plus petite */
+}
+
+.mt-2 {
+  margin-top: 20px; /* Réduction de l'espace supérieur */
+}

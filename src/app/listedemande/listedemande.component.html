@@ -1,0 +1,234 @@
+
+  <div class="container-fluid">
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center">
+            <h3>LISTE DES DEMANDES</h3>
+        </div>
+        <div class="panel-body">
+            <mat-list>
+              
+                <td> <button mat-raised-button color="success" (click)="evaluatebolean()"><b>Ajouter une demande</b></button></td>
+                <mat-divider></mat-divider>
+                <mat-divider></mat-divider>
+                <mat-divider></mat-divider>
+            </mat-list>
+  
+            <!-- Ajout d'un équipement -->
+            <div class="container" *ngIf="mybolean">
+                <h2>Nouveau demande</h2>
+                <form class="form-horizontal" #userForm="ngForm" (ngSubmit)="addedemande()" #addEquipementForm="ngForm">
+                    <div class="form-group">
+                        <label for="date_acquisition">Date demande:</label>
+                        <input
+                            type="date"
+                            class="form-control"
+                            id="date_acquisition"
+                            placeholder="Entrez la date d'acquisition"
+                            name="date_acquisition"
+                            [(ngModel)]="newdemande.date_demande"
+                            required
+                            #date_acquisition="ngModel"
+                        />
+                        <div *ngIf="date_acquisition.invalid && (date_acquisition.dirty || date_acquisition.touched)" class="text-danger">
+                            <div *ngIf="date_acquisition.errors?.['required']">La date d'acquisition est requise.</div>
+                        </div>
+                    </div>
+  
+                    <div class="form-group">
+                        <label for="objet_demande">Objet demande:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="objet_demande"
+                            placeholder="Entrez l'objet demande"
+                            name="objet_demande"
+                            [(ngModel)]="newdemande.objet_demande"
+                            required
+                            minlength="2"
+                            maxlength="50"
+                            #objet_demande="ngModel"
+                        />
+                        <div *ngIf="objet_demande.invalid && (objet_demande.dirty || objet_demande.touched)" class="text-danger">
+                            <div *ngIf="objet_demande.errors?.['required']">L'objet demande est requise.</div>
+                            <div *ngIf="objet_demande.errors?.['minlength']">L'objet demande doit comporter au moins 2 caractères.</div>
+                            <div *ngIf="objet_demande.errors?.['maxlength']">L'objet demande ne doit pas dépasser 50 caractères.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="configuration">Configuration:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="configuration"
+                            placeholder="Entrez la configuration"
+                            name="configuration"
+                            [(ngModel)]="newdemande.configuration"
+                            required
+                            minlength="2"
+                            maxlength="50"
+                            #configuration="ngModel"
+                        />
+                        <div *ngIf="configuration.invalid && (configuration.dirty || configuration.touched)" class="text-danger">
+                            <div *ngIf="configuration.errors?.['required']">La configuration est requise.</div>
+                            <div *ngIf="configuration.errors?.['minlength']">La configuration doit comporter au moins 2 caractères.</div>
+                            <div *ngIf="configuration.errors?.['maxlength']">La configuration ne doit pas dépasser 50 caractères.</div>
+                        </div>
+                    </div>
+  
+                    <div class="form-group">
+                        <label   for="etat_demande">État demande:</label>
+                        <div >
+                            <select class="form-control" id="etat_demande" name="etat_demande" [(ngModel)]="newdemande.etat_demande">
+                                <option value="Reglé">Régler</option>
+                                <option value="Non Reglé">non Régler</option>
+                             
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  for="utilisateur">Sélectionnez votre nom:</label>
+                        <div>
+                            <select id="utilisateur" class="form-control" name="utilisateur" [(ngModel)]="newdemande.utilisateur">
+                                <option *ngFor="let r of lesutilisateurs" [ngValue]="r">{{ r.nom }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" [disabled]="addEquipementForm.invalid">Ajouter</button>
+                </form>
+            </div>
+
+            <!-- Tableau des équipements -->
+            <table class="table table-bordered text-center" *ngIf="!mybolean">
+                <thead>
+                    <tr class="success">
+                        <th class="center">id</th>
+                        <th class="center">Date demande</th>
+                        <th class="center">objet_demande</th>
+                        <th class="center">configuration</th>
+                        <th class="center">etat_demande</th>
+                        <th class="center">demendeur</th>
+                        <th class="center">Suppression</th>
+                        <th class="center">Mise à jour</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr  *ngFor="let d of demandes" [ngClass]="{'regle': d.etat_demande === 'Reglé', 'non-regle': d.etat_demande === 'Non Reglé'}">
+                        <td>{{d.id}}</td>
+                        <td>{{d.date_demande}}</td>
+                        <td>{{d.objet_demande}}</td>
+                        <td>{{d.configuration}}</td>
+                        <td>{{d.etat_demande}}</td>
+                        <td>{{d.utilisateur?.nom}}</td>
+                        <td>
+                            <button mat-raised-button color="warn" (click)="deletdemandebyId(d.id)">Suppression</button>
+                        </td>
+                        <td>
+                            <button mat-raised-button color="primary" (click)="demandeDetails(d.id)">Mise à jour</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Modification d'un équipement -->
+            <div class="panel panel-success" *ngIf="mybolean2">
+                <div class="panel-heading text-center"><h3>Modification</h3></div>
+                <div class="panel-body">
+                    <div class="container">
+                        <form (ngSubmit)="updatedemande()" #form="ngForm">
+                            <div class="form-group">
+                                <label for="date_demande">Date demande:</label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="date_demande"
+                                    placeholder="Entrez la date_demande"
+                                    name="date_demande"
+                                    [(ngModel)]="demandeupdate.date_demande"
+                                    required
+                                    #updateDateDemande="ngModel"
+                                />
+                                <div *ngIf="updateDateDemande.invalid && (updateDateDemande.dirty || updateDateDemande.touched)" class="text-danger">
+                                    <div *ngIf="updateDateDemande.errors?.['required']">La date demande est requise.</div>
+                                </div>
+                            </div>
+  
+                            <div class="form-group">
+                                <label for="updateobjet_demande">Objet demande:</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="updateobjet_demande"
+                                    placeholder="Entrez l'objet demande"
+                                    name="objet_demande"
+                                    [(ngModel)]="demandeupdate.objet_demande"
+                                    required
+                                    minlength="2"
+                                    maxlength="50"
+                                    #updateobjet_demande="ngModel"
+                                />
+                                <div *ngIf="updateobjet_demande.invalid && (updateobjet_demande.dirty || updateobjet_demande.touched)" class="text-danger">
+                                    <div *ngIf="updateobjet_demande.errors?.['required']">L'objet demande est requise.</div>
+                                    <div *ngIf="updateobjet_demande.errors?.['minlength']">L'objet demande doit comporter au moins 2 caractères.</div>
+                                    <div *ngIf="updateobjet_demande.errors?.['maxlength']">L'objet demande ne doit pas dépasser 50 caractères.</div>
+                                </div>
+                            </div>
+  
+                            <div class="form-group">
+                                <label for="updateConfiguration"><b>Configuration:</b></label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="updateConfiguration"
+                                    placeholder="Entrez la nouvelle configuration"
+                                    name="configuration"
+                                    [(ngModel)]="demandeupdate.configuration"
+                                    required
+                                    minlength="2"
+                                    maxlength="50"
+                                    #updateConfiguration="ngModel"
+                                />
+                                <div *ngIf="updateConfiguration.invalid && (updateConfiguration.dirty || updateConfiguration.touched)" class="text-danger">
+                                    <div *ngIf="updateConfiguration.errors?.['required']">La configuration est requise.</div>
+                                    <div *ngIf="updateConfiguration.errors?.['minlength']">La configuration doit comporter au moins 2 caractères.</div>
+                                    <div *ngIf="updateConfiguration.errors?.['maxlength']">La configuration ne doit pas dépasser 50 caractères.</div>
+                                </div>
+                            </div>
+  
+                            <div class="form-group">
+                                <label   for="etat_demande">État demande:</label>
+                                <div >
+                                    <select class="form-control" id="etat_demande" name="etat_demande" [(ngModel)]="demandeupdate.etat_demande">
+                                        <option value="Reglé">Régler</option>
+                                        <option value="Non Reglé">non Régler</option>
+                                     
+                                    </select>
+                                </div>
+                            </div>
+  
+
+                            <div class="form-group">
+                                <label  for="utilisateur">Sélectionnez votre nom:</label>
+                                <div>
+                                    <select id="utilisateur" class="form-control" name="utilisateur" [(ngModel)]="demandeupdate.utilisateur">
+                                        <option *ngFor="let r of lesutilisateurs" [ngValue]="r">{{ r.nom }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <mat-list>
+                                <mat-divider></mat-divider>
+                            </mat-list>
+                            <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Mettre à jour</button>
+                            <mat-list>
+                                <mat-divider></mat-divider>
+                            </mat-list>
+                            <button type="button" mat-raised-button color="warn" (click)="evaluatebolean2()">Annuler</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

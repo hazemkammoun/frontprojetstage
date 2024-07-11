@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+  }
+  .column {
+    float: inline-end;
+    width: 33.33%;
+    padding: 3.5%;
+    margin-bottom: 20px;
+  }
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  .mat-card-content:last-child {
+    padding-bottom: 20px; /* Ajoute de l'espace en bas du dernier élément avec la classe .mat-card-content */
+}

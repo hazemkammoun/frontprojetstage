@@ -1,0 +1,91 @@
+.container-fluid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Centre verticalement */
+  position: relative; /* To position the overlay absolutely */
+  overflow: hidden; /* To ensure the pseudo-element doesn't overflow */
+}
+
+.container-fluid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/images/intranet2.jpg');
+  background-size: cover; /* Pour couvrir toute la zone */
+  background-position: center; /* Centrer l'image horizontalement et verticalement */
+  opacity: 0.3; /* Adjust this value to control the transparency */
+  z-index: -1; /* To place the background below the content */
+}
+
+.content {
+  position: relative; /* Ensures content is above the overlay */
+  z-index: 1; /* Ensures content is above the background */
+}
+
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.register-panel {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 20px; /* Add some space on the sides */
+  padding: 20px;
+  background-color: white; /* Background color of the card */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for the card */
+  border-radius: 8px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-header {
+  background-color: #3f51b5; /* Background color of the top part */
+  width: 100%;
+  padding: 20px 0;
+  border-radius: 8px 8px 0 0; /* Rounded top */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 200px; /* Increase logo size */
+  height: 200px;
+}
+
+.register-header {
+  font-family: 'Arial', sans-serif; /* Change font according to preference */
+  font-size: 24px;
+  color: white; /* Text color */
+  font-weight: bold; /* Bold text */
+  margin-top: 20px; /* Add space between logo and title */
+}
+
+.full-width {
+  width: 100%;
+}
+
+.btn-block {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.login-link {
+  margin-top: 20px;
+}
+
+.login-btn {
+  background-color: #f44336; /* Different color for the Register button */
+  color: white;
+}

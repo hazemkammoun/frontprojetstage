@@ -1,0 +1,231 @@
+<div class="container-fluid">
+  <div class="panel panel-primary">
+      <div class="panel-heading text-center">
+          <h3>LISTE DES EQUIPEMENTS</h3>
+      </div>
+      <div class="panel-body">
+          <mat-list>
+              
+              <td> <button mat-raised-button color="success" (click)="evaluatebolean()"><b>Ajouter un équipement</b></button></td>
+              <mat-divider></mat-divider>
+              <mat-divider></mat-divider>
+              <mat-divider></mat-divider>
+          </mat-list>
+
+          <!-- Ajout d'un équipement -->
+          <div class="container" *ngIf="mybolean">
+              <h2>Nouveau équipement</h2>
+              <form class="form-horizontal" #userForm="ngForm"  (ngSubmit)="addequipe()" #addEquipementForm="ngForm">
+                  <div class="form-group">
+                      <label for="date_acquisition">Date d'acquisition:</label>
+                      <input
+                          type="date"
+                          class="form-control"
+                          id="date_acquisition"
+                          placeholder="Entrez la date d'acquisition"
+                          name="date_acquisition"
+                          [(ngModel)]="newequipe.date_acquisition"
+                          required
+                          #date_acquisition="ngModel"
+                      />
+                      <div *ngIf="date_acquisition.invalid && (date_acquisition.dirty || date_acquisition.touched)" class="text-danger">
+                          <div *ngIf="date_acquisition.errors?.['required']">La date d'acquisition est requise.</div>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="configuration">Configuration:</label>
+                      <input
+                          type="text"
+                          class="form-control"
+                          id="configuration"
+                          placeholder="Entrez la configuration"
+                          name="configuration"
+                          [(ngModel)]="newequipe.configuration"
+                          required
+                          minlength="2"
+                          maxlength="50"
+                          #configuration="ngModel"
+                      />
+                      <div *ngIf="configuration.invalid && (configuration.dirty || configuration.touched)" class="text-danger">
+                          <div *ngIf="configuration.errors?.['required']">La configuration est requise.</div>
+                          <div *ngIf="configuration.errors?.['minlength']">La configuration doit comporter au moins 2 caractères.</div>
+                          <div *ngIf="configuration.errors?.['maxlength']">La configuration ne doit pas dépasser 50 caractères.</div>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="etat">État:</label>
+                      <input
+                          type="text"
+                          class="form-control"
+                          id="etat"
+                          placeholder="Entrez l'état"
+                          name="etat"
+                          [(ngModel)]="newequipe.etat"
+                          required
+                          minlength="2"
+                          maxlength="50"
+                          #etat="ngModel"
+                      />
+                      <div *ngIf="etat.invalid && (etat.dirty || etat.touched)" class="text-danger">
+                          <div *ngIf="etat.errors?.['required']">L'état est requis.</div>
+                          <div *ngIf="etat.errors?.['minlength']">L'état doit comporter au moins 2 caractères.</div>
+                          <div *ngIf="etat.errors?.['maxlength']">L'état ne doit pas dépasser 50 caractères.</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Type d'équipement:</label>
+                    <select [(ngModel)]="newequipe.typeEquipement" name="typeEquipement" required>
+                      <option *ngFor="let option of typeEquipementOptions" [value]="option">{{ option }}</option>
+                    </select>
+                  </div>
+                  
+                  
+               
+
+                  <div class="form-group">
+                      <label for="reservable">Reservable:</label>
+                      <input
+                          type="checkbox"
+                          class="form-control"
+                          id="reservable"
+                          name="reservable"
+                          [(ngModel)]="newequipe.reservable"
+                      />
+                  </div>
+
+                  <button type="submit" class="btn btn-primary" [disabled]="addEquipementForm.invalid">Ajouter</button>
+              </form>
+          </div>
+          <!-- Tableau des équipements -->
+          <table class="table table-bordered text-center" *ngIf="!mybolean">
+              <thead>
+                  <tr class="success">
+                      <th class="center">id</th>
+                      <th class="center">Date d'acquisition</th>
+                      <th class="center">Configuration</th>
+                      <th class="center">État</th>
+                      <th class="center">Réservable</th>
+                      <th class="center">Type</th>
+                      <th class="center">Suppression</th>
+                      <th class="center">Mise à jour</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let equip of equipement">
+                      <td>{{equip.id}}</td>
+                      <td>{{equip.date_acquisition}}</td>
+                      <td>{{equip.configuration}}</td>
+                      <td>{{equip.etat}}</td>
+                      <td>{{equip.reservable}}</td>
+                      <td>{{equip.typeEquipement}}</td>
+                      <td>
+                          <button mat-raised-button color="warn" (click)="deletequipementbyid(equip.id)">Suppression</button>
+                      </td>
+                      <td>
+                          <button mat-raised-button color="primary" (click)="equipDetails(equip.id)">Mise à jour</button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          <!-- Modification d'un équipement -->
+          <div class="panel panel-success" *ngIf="mybolean2">
+              <div class="panel-heading text-center"><h3>Modification</h3></div>
+              <div class="panel-body">
+                  <div class="container">
+                      <form (ngSubmit)="Update()" #form="ngForm">
+                          <div class="form-group">
+                              <label for="updateDateAcquisition"><b>Date d'acquisition:</b></label>
+                              <input
+                                  type="date"
+                                  class="form-control"
+                                  id="updateDateAcquisition"
+                                  placeholder="Entrez la nouvelle date d'acquisition"
+                                  name="date_acquisition"
+                                  [(ngModel)]="equipementupdate.date_acquisition"
+                                  required
+                                  #updateDateAcquisition="ngModel"
+                              />
+                              <div *ngIf="updateDateAcquisition.invalid && (updateDateAcquisition.dirty || updateDateAcquisition.touched)" class="text-danger">
+                                  <div *ngIf="updateDateAcquisition.errors?.['required']">La date d'acquisition est requise.</div>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="updateConfiguration"><b>Configuration:</b></label>
+                              <input
+                                  type="text"
+                                  class="form-control"
+                                  id="updateConfiguration"
+                                  placeholder="Entrez la nouvelle configuration"
+                                  name="configuration"
+                                  [(ngModel)]="equipementupdate.configuration"
+                                  required
+                                  minlength="2"
+                                  maxlength="50"
+                                  #updateConfiguration="ngModel"
+                              />
+                              <div *ngIf="updateConfiguration.invalid && (updateConfiguration.dirty || updateConfiguration.touched)" class="text-danger">
+                                  <div *ngIf="updateConfiguration.errors?.['required']">La configuration est requise.</div>
+                                  <div *ngIf="updateConfiguration.errors?.['minlength']">La configuration doit comporter au moins 2 caractères.</div>
+                                  <div *ngIf="updateConfiguration.errors?.['maxlength']">La configuration ne doit pas dépasser 50 caractères.</div>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="updateEtat"><b>État:</b></label>
+                              <input
+                                  type="text"
+                                  class="form-control"
+                                  id="updateEtat"
+                                  placeholder="Entrez le nouvel état"
+                                  name="etat"
+                                  [(ngModel)]="equipementupdate.etat"
+                                  required
+                                  minlength="2"
+                                  maxlength="50"
+                                  #updateEtat="ngModel"
+                              />
+                              <div *ngIf="updateEtat.invalid && (updateEtat.dirty || updateEtat.touched)" class="text-danger">
+                                  <div *ngIf="updateEtat.errors?.['required']">L'état est requis.</div>
+                                  <div *ngIf="updateEtat.errors?.['minlength']">L'état doit comporter au moins 2 caractères.</div>
+                                  <div *ngIf="updateEtat.errors?.['maxlength']">L'état ne doit pas dépasser 50 caractères.</div>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label>Type d'équipement:</label>
+                            <select [(ngModel)]="newequipe.typeEquipement" name="typeEquipement" required>
+                              <option *ngFor="let option of typeEquipementOptions" [value]="option">{{ option }}</option>
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="updateReservable"><b>Réservable:</b></label>
+                              <input
+                                  type="checkbox"
+                                  class="form-control"
+                                  id="updateReservable"
+                                  name="reservable"
+                                  [(ngModel)]="equipementupdate.reservable"
+                              />
+                          </div>
+
+                          <mat-list>
+                            <mat-divider></mat-divider>
+                        </mat-list>
+                        <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Mettre à jour</button>
+                        <mat-list>
+                            <mat-divider></mat-divider>
+                        </mat-list>
+                        <button type="button" mat-raised-button color="warn" (click)="evaluatebolean2()">Annuler</button>
+    
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+

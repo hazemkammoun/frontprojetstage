@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/* body {
+    color: rgb(225, 243, 245);
+    font-weight: 400;
+  } */
+
+
+
+  @import "~bootstrap/dist/css/bootstrap.min.css";
+    
+
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-warn-button {
+  background-color: #ff0000; /* Red color for warn */
+  color: #fff; /* White text color */
+}
+.mat-primary-button {
+  background-color: #007bff; /* Blue color for primary */
+  color: #fff; /* White text color */
+}

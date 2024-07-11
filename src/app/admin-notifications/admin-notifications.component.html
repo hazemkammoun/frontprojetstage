@@ -1,0 +1,14 @@
+<!-- admin-notifications.component.html -->
+<div class="admin-notifications">
+  <h3>Notifications d'Équipement</h3>
+  <ul>
+    <li *ngFor="let notification of equipmentNotifications">{{ notification }}</li>
+  </ul>
+
+  <h3>Notifications de Réservation</h3>
+  <ul>
+    <li *ngFor="let notification of reservationNotifications">{{ notification }}</li>
+  </ul>
+
+  <button (click)="clearNotifications()" class="btn btn-danger">Effacer les notifications</button>
+</div>

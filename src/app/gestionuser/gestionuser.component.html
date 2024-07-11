@@ -1,0 +1,368 @@
+<div class="container-fluid">
+  <div class="panel panel-primary">
+    <div class="panel-heading text-center">
+      <h4>LISTE DES UTILISATEURS</h4>
+    </div>
+    <div class="panel-body">
+      <mat-list>
+        
+        <button mat-raised-button color="success" (click)="evaluatebolean()"><b>Ajouter un utilisateur</b></button>
+        <mat-divider></mat-divider>
+      </mat-list>
+
+      <div class="container" *ngIf="mybolean">
+        <h2>Nouveau utilisateur</h2>
+        <form class="form-horizontal" #userForm="ngForm" (ngSubmit)="adduser()">
+          <div class="form-group">
+            <label for="nom">Nom:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nom"
+              placeholder="Entrez votre nom"
+              name="nom"
+              [(ngModel)]="newuser.nom"
+              required
+              minlength="2"
+              maxlength="30"
+              #nom="ngModel"
+            />
+            <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+              <div *ngIf="nom.errors?.['required']">Le nom est requis.</div>
+              <div *ngIf="nom.errors?.['minlength']">Le nom doit comporter au moins 2 caractères.</div>
+              <div *ngIf="nom.errors?.['maxlength']">Le nom ne doit pas dépasser 30 caractères.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="prenom">Prenom:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="prenom"
+              placeholder="Entrez votre prénom"
+              name="prenom"
+              [(ngModel)]="newuser.prenom"
+              required
+              minlength="2"
+              maxlength="30"
+              #prenom="ngModel"
+            />
+            <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="text-danger">
+              <div *ngIf="prenom.errors?.['required']">Le prénom est requis.</div>
+              <div *ngIf="prenom.errors?.['minlength']">Le prénom doit comporter au moins 2 caractères.</div>
+              <div *ngIf="prenom.errors?.['maxlength']">Le prénom ne doit pas dépasser 30 caractères.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cin">Cin:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="cin"
+              placeholder="Entrez votre cin"
+              name="cin"
+              [(ngModel)]="newuser.cin"
+              required
+              minlength="8"
+              maxlength="8"
+              #cin="ngModel"
+            />
+            <div *ngIf="cin.invalid && (cin.dirty || cin.touched)" class="text-danger">
+              <div *ngIf="cin.errors?.['required']">Le CIN est requis.</div>
+              <div *ngIf="cin.errors?.['minlength'] || cin.errors?.['maxlength']">Le CIN doit comporter 8 chiffres.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Entrez votre email"
+              name="email"
+              [(ngModel)]="newuser.email"
+              required
+              email
+              #email="ngModel"
+            />
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+              <div *ngIf="email.errors?.['required']">L'email est requis.</div>
+              <div *ngIf="email.errors?.['email']">Format d'email invalide.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="matricule">Matricule:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="matricule"
+              placeholder="Entrez votre matricule"
+              name="matricule"
+              [(ngModel)]="newuser.matricule"
+              required
+              #matricule="ngModel"
+            />
+            <div *ngIf="matricule.invalid && (matricule.dirty || matricule.touched)" class="text-danger">
+              <div *ngIf="matricule.errors?.['required']">Le matricule est requis.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="adresse">Adresse:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="adresse"
+              placeholder="Entrez votre adresse"
+              name="adresse"
+              [(ngModel)]="newuser.adresse"
+              required
+              #adresse="ngModel"
+            />
+            <div *ngIf="adresse.invalid && (adresse.dirty || adresse.touched)" class="text-danger">
+              <div *ngIf="adresse.errors?.['required']">L'adresse est requise.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="poste">Poste:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="poste"
+              placeholder="Entrez votre poste"
+              name="poste"
+              [(ngModel)]="newuser.poste"
+              required
+              #poste="ngModel"
+            />
+            <div *ngIf="poste.invalid && (poste.dirty || poste.touched)" class="text-danger">
+              <div *ngIf="poste.errors?.['required']">Le poste est requis.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="telephone">Téléphone:</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="telephone"
+              placeholder="Entrez votre téléphone"
+              name="telephone"
+              [(ngModel)]="newuser.telephone"
+              required
+              pattern="^\+?\d{10,13}$"
+              #telephone="ngModel"
+            />
+            <div *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)" class="text-danger">
+              <div *ngIf="telephone.errors?.['required']">Le téléphone est requis.</div>
+              <div *ngIf="telephone.errors?.['pattern']">Format de téléphone invalide.</div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
+          </div>
+        </form>
+      </div>
+
+      <table class="table table-bordered text-center" *ngIf="!mybolean">
+        <thead>
+          <tr class="success">
+            <th class="center">Id</th>
+            <th class="center">Nom</th>
+            <th class="center">Prénom</th>
+            <th class="center">Cin</th>
+            <th class="center">E-mail</th>
+            <th class="center">Matricule</th>
+            <th class="center">Adresse</th>
+            <th class="center">Poste</th>
+            <th class="center">Téléphone</th>
+            <th class="center">Suppression</th>
+            <th class="center">Mise à jour</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of utilisateur">
+            <td>{{user.id}}</td>
+            <td>{{user.nom}}</td>
+            <td>{{user.prenom}}</td>
+            <td>{{user.cin}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.matricule}}</td>
+            <td>{{user.adresse}}</td>
+            <td>{{user.poste}}</td>
+            <td>{{user.telephone}}</td>
+            <td><button mat-raised-button color="warn" (click)="deletuserbyid(user.id)">Suppression</button></td>
+            <td><button mat-raised-button color="primary" (click)="userDetails(user.id)">Mise à jour</button></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="panel panel-success" *ngIf="mybolean2">
+        <div class="panel-heading text-center">
+          <h3>Modification</h3>
+        </div>
+        <div class="panel-body">
+          <div class="container">
+         
+            <form (ngSubmit)="Update()" #updateForm="ngForm">
+              <div class="form-group">
+                <label for="updateNom"><b>Nom:</b></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="updateNom"
+                  placeholder="Entrez votre nom"
+                  name="nom"
+                  [(ngModel)]="utilisateurupdate.nom"
+                  required
+                  minlength="2"
+                  maxlength="30"
+                  #updateNom="ngModel"
+                />
+                <div *ngIf="updateNom.invalid && (updateNom.dirty || updateNom.touched)" class="text-danger">
+                  <div *ngIf="updateNom.errors?.['required']">Le nom est requis.</div>
+                  <div *ngIf="updateNom.errors?.['minlength']">Le nom doit comporter au moins 2 caractères.</div>
+                  <div *ngIf="updateNom.errors?.['maxlength']">Le nom ne doit pas dépasser 30 caractères.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="updatePrenom"><b>Prénom:</b></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="updatePrenom"
+                  placeholder="Entrez votre prénom"
+                  name="prenom"
+                  [(ngModel)]="utilisateurupdate.prenom"
+                  required
+                  minlength="2"
+                  maxlength="30"
+                  #updatePrenom="ngModel"
+                />
+                <div *ngIf="updatePrenom.invalid && (updatePrenom.dirty || updatePrenom.touched)" class="text-danger">
+                  <div *ngIf="updatePrenom.errors?.['required']">Le prénom est requis.</div>
+                  <div *ngIf="updatePrenom.errors?.['minlength']">Le prénom doit comporter au moins 2 caractères.</div>
+                  <div *ngIf="updatePrenom.errors?.['maxlength']">Le prénom ne doit pas dépasser 30 caractères.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="updateCin">Cin:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="updateCin"
+                  placeholder="Entrez votre cin"
+                  name="cin"
+                  [(ngModel)]="utilisateurupdate.cin"
+                  required
+                  minlength="8"
+                  maxlength="8"
+                  #updateCin="ngModel"
+                />
+                <div *ngIf="updateCin.invalid && (updateCin.dirty || updateCin.touched)" class="text-danger">
+                  <div *ngIf="updateCin.errors?.['required']">Le CIN est requis.</div>
+                  <div *ngIf="updateCin.errors?.['minlength'] || updateCin.errors?.['maxlength']">Le CIN doit comporter 8 chiffres.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="updateEmail">Email:</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="updateEmail"
+                  placeholder="Entrez votre email"
+                  name="email"
+                  [(ngModel)]="utilisateurupdate.email"
+                  required
+                  email
+                  #updateEmail="ngModel"
+                />
+                <div *ngIf="updateEmail.invalid && (updateEmail.dirty || updateEmail.touched)" class="text-danger">
+                  <div *ngIf="updateEmail.errors?.['required']">L'email est requis.</div>
+                  <div *ngIf="updateEmail.errors?.['email']">Format d'email invalide.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="updateMatricule">Matricule:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="updateMatricule"
+                  placeholder="Entrez votre matricule"
+                  name="matricule"
+                  [(ngModel)]="utilisateurupdate.matricule"
+                  required
+                  #updateMatricule="ngModel"
+                />
+                <div *ngIf="updateMatricule.invalid && (updateMatricule.dirty || updateMatricule.touched)" class="text-danger">
+                  <div *ngIf="updateMatricule.errors?.['required']">Le matricule est requis.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="updateAdresse">Adresse:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="updateAdresse"
+                  placeholder="Entrez votre adresse"
+                  name="adresse"
+                  [(ngModel)]="utilisateurupdate.adresse"
+                  required
+                  #updateAdresse="ngModel"
+                />
+                <div *ngIf="updateAdresse.invalid && (updateAdresse.dirty || updateAdresse.touched)" class="text-danger">
+                  <div *ngIf="updateAdresse.errors?.['required']">L'adresse est requise.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="updatePoste">Poste:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="updatePoste"
+                  placeholder="Entrez votre poste"
+                  name="poste"
+                  [(ngModel)]="utilisateurupdate.poste"
+                  required
+                  #updatePoste="ngModel"
+                />
+                <div *ngIf="updatePoste.invalid && (updatePoste.dirty || updatePoste.touched)" class="text-danger">
+                  <div *ngIf="updatePoste.errors?.['required']">Le poste est requis.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="updateTelephone">Téléphone:</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="updateTelephone"
+                  placeholder="Entrez votre téléphone"
+                  name="telephone"
+                  [(ngModel)]="utilisateurupdate.telephone"
+                  required
+                  pattern="^\+?\d{10,13}$"
+                  #updateTelephone="ngModel"
+                />
+                <div *ngIf="updateTelephone.invalid && (updateTelephone.dirty || updateTelephone.touched)" class="text-danger">
+                  <div *ngIf="updateTelephone.errors?.['required']">Le téléphone est requis.</div>
+                  <div *ngIf="updateTelephone.errors?.['pattern']">Format de téléphone invalide.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <mat-list>
+                  <mat-divider></mat-divider>
+                 
+                </mat-list>
+                <button type="submit" class="btn btn-primary" [disabled]="updateForm.invalid">Mettre à jour</button>
+                <mat-list>
+                  <mat-divider></mat-divider>
+                <button type="button" class="btn btn-danger" (click)="evaluatebolean2()">Annuler</button>
+              </mat-list>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,133 @@
+.panel {
+  margin-top: 50px;
+  margin: 20px auto;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.panel-primary {
+  border-color: #68c0d0;
+}
+
+.panel-heading {
+  background-color: #0a5c5c;
+  color: #fff;
+  padding: 15px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.panel-heading h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.panel-body {
+  padding: 15px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0 20px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.search-input:focus {
+  border-color: #98af4c;
+  outline: none;
+}
+
+/* Style pour le tableau */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Style pour les cellules du tableau */
+td, th {
+  padding: 12px 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+/* Style pour l'en-tête du tableau */
+thead {
+  background-color: #131313;
+  color: white;
+}
+
+/* Style pour les cellules de données */
+tbody td {
+  background-color: #f9f9f9;
+}
+
+/* Style pour les lignes impaires du tableau */
+tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* Style pour la première colonne */
+td:first-child, th:first-child {
+  width: 15%;
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Style pour la deuxième colonne */
+td:nth-child(2), th:nth-child(2) {
+  width: 10%;
+}
+
+/* Style pour les autres colonnes */
+td:nth-child(3), th:nth-child(3),
+td:nth-child(4), th:nth-child(4),
+td:nth-child(5), th:nth-child(5),
+td:nth-child(6), th:nth-child(6) {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Hover effect for table rows */
+tbody tr:hover {
+  background-color: #ddd;
+}
+
+/* Style pour le bouton */
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #0a5c5c;
+  border-color: #c7c9c8;
+}
+
+.btn-primary:hover {
+  background-color: #45a049;
+  border-color: #45a049;
+}
+

@@ -1,0 +1,206 @@
+<div class="container-fluid">
+    <div class="panel panel-primary">
+      <div class="panel-heading text-center">
+        <h3>LISTE DES SERVICES</h3>
+      </div>
+      <div class="panel-body">
+        <mat-list>
+       
+          <td> <button mat-raised-button color="success" (click)="evaluateboleann()"><b>Ajouter un service</b></button></td>
+          <mat-divider></mat-divider>
+          <mat-divider></mat-divider>
+          <mat-divider></mat-divider>
+        </mat-list>
+  
+        <div class="container" *ngIf="mybolean">
+          <h2>Nouveau service</h2>
+          <form class="form-horizontal" #serviceForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="nom">Nom:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nom"
+                placeholder="Entrez le nom du service"
+                name="nom"
+                [(ngModel)]="monservice.nom"
+                required
+                minlength="2"
+                maxlength="50"
+                #nom="ngModel"
+              />
+              <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+                <div *ngIf="nom.errors?.['required']">Le nom est requis.</div>
+                <div *ngIf="nom.errors?.['minlength']">Le nom doit comporter au moins 2 caractères.</div>
+                <div *ngIf="nom.errors?.['maxlength']">Le nom ne doit pas dépasser 50 caractères.</div>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="description"
+                placeholder="Entrez la description du service"
+                name="description"
+                [(ngModel)]="monservice.description"
+                required
+                minlength="5"
+                maxlength="100"
+                #description="ngModel"
+              />
+              <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">
+                <div *ngIf="description.errors?.['required']">La description est requise.</div>
+                <div *ngIf="description.errors?.['minlength']">La description doit comporter au moins 5 caractères.</div>
+                <div *ngIf="description.errors?.['maxlength']">La description ne doit pas dépasser 100 caractères.</div>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="direction">Direction:</label>
+              <select
+                id="direction"
+                class="form-control"
+                name="direction"
+                [(ngModel)]="monservice.direction"
+                required
+                #direction="ngModel"
+              >
+                <option *ngFor="let d of mesdirections" [ngValue]="d">{{ d.nom }}</option>
+              </select>
+              <div *ngIf="direction.invalid && (direction.dirty || direction.touched)" class="text-danger">
+                <div *ngIf="direction.errors?.['required']">La direction est requise.</div>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" [disabled]="serviceForm.invalid">Submit</button>
+            </div>
+          </form>
+        </div>
+  
+
+          <table class="table table-bordered text-center" *ngIf="!mybolean">
+            <thead>
+              <tr class="success">
+                <th class="text-center">Id</th>
+                <th class="text-center">Nom</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Direction</th>
+                <th class="text-center">Suppression</th>
+                <th class="text-center">Mise à jour</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let monservice of messervices">
+                <td>{{monservice.id}}</td>
+                <td>{{monservice.nom}}</td>
+                <td>{{monservice.description}}</td>
+                <td>{{monservice.direction?.nom}}</td>
+                <td><button mat-raised-button color="warn" (click)="deletservicebyid(monservice.id)">Suppression</button></td>
+                <td><button mat-raised-button color="primary" (click)="serviceDetails(monservice.id)">Mettre à jour</button></td>
+              </tr>
+            </tbody>
+          </table>
+  
+          <div class="panel panel-success" *ngIf="mybolean2">
+            <div class="panel-heading text-center">
+              <h3>Modification</h3>
+            </div>
+            <div class="panel-body">
+              <div class="container">
+               
+                <form (ngSubmit)="Update()" #updateForm="ngForm">
+                  <div class="form-group">
+                    <label for="updateNom"><b>Nom:</b></label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="updateNom"
+                      placeholder="Entrez le nom du service"
+                      name="nom"
+                      [(ngModel)]="monservice.nom"
+                      required
+                      minlength="2"
+                      maxlength="30"
+                      #updateNom="ngModel"
+                    />
+                    <div *ngIf="updateNom.invalid && (updateNom.dirty || updateNom.touched)" class="text-danger">
+                      <div *ngIf="updateNom.errors?.['required']">Le nom est requis.</div>
+                      <div *ngIf="updateNom.errors?.['minlength']">Le nom doit comporter au moins 2 caractères.</div>
+                      <div *ngIf="updateNom.errors?.['maxlength']">Le nom ne doit pas dépasser 30 caractères.</div>
+                    </div>
+                  </div>
+  
+                  <div class="form-group">
+                    <label for="updateDescription"><b>Description:</b></label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="updateDescription"
+                      placeholder="Entrez la description du service"
+                      name="description"
+                      [(ngModel)]="monservice.description"
+                      required
+                      minlength="5"
+                      maxlength="100"
+                      #updateDescription="ngModel"
+                    />
+                    <div *ngIf="updateDescription.invalid && (updateDescription.dirty || updateDescription.touched)" class="text-danger">
+                      <div *ngIf="updateDescription.errors?.['required']">La description est requise.</div>
+                      <div *ngIf="updateDescription.errors?.['minlength']">La description doit comporter au moins 5 caractères.</div>
+                      <div *ngIf="updateDescription.errors?.['maxlength']">La description ne doit pas dépasser 100 caractères.</div>
+                    </div>
+                  </div>
+  
+                  <div class="form-group">
+                    <label for="updateDirection">Direction:</label>
+                    <select
+                      id="updateDirection"
+                      class="form-control"
+                      name="direction"
+                      [(ngModel)]="monservice.direction"
+                      required
+                      #updateDirection="ngModel"
+                    >
+                      <option *ngFor="let d of mesdirections" [ngValue]="d">{{ d.nom }}</option>
+                    </select>
+                    <div *ngIf="updateDirection.invalid && (updateDirection.dirty || updateDirection.touched)" class="text-danger">
+                      <div *ngIf="updateDirection.errors?.['required']">La direction est requise.</div>
+                    </div>
+                  </div>
+  
+                  <mat-list>
+                    <mat-divider></mat-divider>
+                   
+                  </mat-list>
+                    <button type="submit" class="btn btn-primary" [disabled]="updateForm.invalid">Mettre à jour</button>
+                    <mat-list>
+                        <mat-divider></mat-divider>
+                    <button type="button" class="btn btn-danger" (click)="evaluatebolean2()">Annuler</button>
+                </mat-list>
+               
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

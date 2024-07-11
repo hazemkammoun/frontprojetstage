@@ -1,0 +1,59 @@
+<div class="panel panel-primary">
+    <div class="panel-heading text-center">
+      <h3>DEMANDE DE RÉSERVATION</h3>
+    </div>
+    <div class="panel-body custom-background">
+   
+   
+  
+      <div class="container">
+
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="typemeeting">Typemeeting:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="typemeeting" placeholder="Entrez votre typemeeting" name="typemeeting" [(ngModel)]="reserv.typemeeting">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="date_du_resrvation">Date de réservation:</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" id="date_du_resrvation" placeholder="Entrez votre date de réservation" name="date_du_resrvation" [(ngModel)]="reserv.date_du_resrvation">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="date_fin">Date de fin:</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" id="date_fin" placeholder="Entrez votre date de fin" name="date_fin" [(ngModel)]="reserv.date_fin">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="salle">Sélectionnez la salle:</label>
+            <div class="col-sm-10">
+              <select id="salle" class="form-control" name="salle" [(ngModel)]="reserv.salle">
+                <option *ngFor="let s of messalles" [ngValue]="s">{{ s.nom }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="utilisateur">Sélectionnez votre nom:</label>
+            <div class="col-sm-10">
+              <select id="utilisateur" class="form-control" name="utilisateur" [(ngModel)]="reserv.utilisateur">
+                <option *ngFor="let u of lesutilisateurs" [ngValue]="u">{{ u.nom }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group btn-container">
+            <div class="col-sm-15">
+                <button type="submit"  class="btn btn-primary" (click)="addRes()">Réserver</button>
+            </div>
+          </div>
+          <!-- Affichage des messages d'erreur -->
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
