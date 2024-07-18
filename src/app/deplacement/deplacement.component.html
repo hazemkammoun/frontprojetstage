@@ -1,0 +1,151 @@
+
+<div *ngIf="mybolean">
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label>عدد</label>
+                <input type="text" name="number">
+            </div>
+    
+            <div class="form-group">
+                <label>في نطاق المهام الموكلة للمؤسسة وفي إطار أنشطتها، يتقدم/تتقدم بطلب للسيد:</label>
+                <input type="text" name="request_to">
+            </div>
+    
+            <div class="form-group">
+                <label>الصفة:</label>
+                <input type="text" name="position">
+            </div>
+    
+            <div class="form-group">
+                <label>المصلحة/الوحدة:</label>
+                <input type="text" name="department">
+            </div>
+    
+           
+            <div class="form-group">
+                <label>الإدارة:</label>
+                <input type="text" name="administration">
+            </div>
+            <div class="form-group">
+                <label>الإدارة الفرعية :</label>
+                <input type="text" name="sous_direction">
+            </div>
+            <div class="form-group">
+                <label>من السيد المدير العام للمركز الوطني للعلوم والتكنولوجيا نرجو الترخيص له(ها) بالتنقل إلى:</label>
+            </div>
+    
+            <div class="form-group">
+                <label>المؤسسة:</label>
+                <input type="text" name="institution">
+            </div>
+    
+            <div class="form-group">
+                <label>القيام بمهمة تتمثل في (أذكر الغاية بكل دقة):</label>
+                <textarea name="mission_details"></textarea>
+            </div>
+    
+            <div class="form-group">
+                <label>وتدخل في إطار النشاط العادي</label>
+                <input type="checkbox" name="normal_activity">
+            </div>
+    
+            <div class="form-group">
+                <label>مشروع</label>
+                <input type="checkbox" name="project">
+            </div>
+            <div class="form-group">
+                <label>أذكره:</label>
+                <textarea name="description_mission"></textarea>
+            </div>
+            <div class="form-group">
+                <label>إتفاقية شراكة مع المحيط (أذكر موضوعها والمؤسسة المعنية):</label>
+                <textarea name="partnership_details"></textarea>
+            </div>
+            <div class="form-group">
+                <label>و ذلك</label>
+               
+            </div>
+            <div class="form-group">
+                <label for="exampleDatepicker1">يوم:</label>
+                <input type="date" class="form-control" id="exampleDatepicker1" name="day">
+              </div>
+              <div class="form-group">
+                <label for="departureTime">ساعة الإنطلاق من المركز:</label>
+                <input type="time" class="form-control" id="departureTime" name="departure_time">
+              </div>
+    
+          
+    
+              <div class="form-group">
+                <label for="returnTime">ساعة الرجوع المحتملة:</label>
+                <input type="time" class="form-control" id="returnTime" name="return_time">
+              </div>
+              
+            <div class="form-group">
+                <label>أيام:</label>
+                <input type="text" name="days">
+            </div>
+            <div class="form-group">
+                <label for="returnTime2">ساعة الرجوع المحتملة:</label>
+                <input type="time" class="form-control" id="returnTime2" name="return_time_2">
+              </div>
+            <label>و يستعمل للغرض:</label>
+              <div class="form-group">
+                <label>سيارة خاصة</label>
+                <input type="checkbox" name="private_car">
+            </div>
+            <div class="form-group">
+                <label>سيارة إدارية</label>
+                <input type="checkbox" name="administrative_car">
+            </div>
+    
+            <div class="form-group signature">
+                <label>إمضاء صاحب الطلب:</label>
+                <input type="text" name="signature">
+            </div>
+    
+            <div class="form-group">
+                <label>سيدي ثابت في:</label>
+                <input type="text" name="location">
+            </div>
+        </form>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+     <button class="btn btn-primary" type="submit">Send</button>
+        &nbsp;
+        <button class="btn btn-primary" type="reset">Cancel</button>
+      </div>
+    
+    
+
+</div>
+
+
+<div>
+    <button  class="btn btn-primary" (click)="changeboolean()">Ajout</button>
+
+    <table class="table table-bordered text-center" *ngIf="!mybolean">
+        <thead>
+          <tr class="success">
+            <th class="center">id</th>
+            <th class="center">nom</th>
+            <th class="center">fonction</th>
+           
+     
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dep of lesdeplacement">
+            <td>{{dep.id}}</td>
+            <td>{{dep.nom}}</td>
+            <td>{{dep.fonction}}</td>
+          
+            </tr>
+        </tbody>
+      </table>
+      
+      
+    
+</div>
+

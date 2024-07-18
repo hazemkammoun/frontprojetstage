@@ -43,7 +43,8 @@ import { ReserverSalleComponent } from './reserver-salle/reserver-salle.componen
 import { DemandeEquipementComponent } from './demande-equipement/demande-equipement.component';
 import { AdminNotificationsComponent } from './admin-notifications/admin-notifications.component';
 import { ListedemandeComponent } from './listedemande/listedemande.component';
-import { FullCalendarModule } from '@fullcalendar/angular'; // Import FullCalendar
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { DeplacementComponent } from './deplacement/deplacement.component'; // Import FullCalendar
 
 
 
@@ -76,6 +77,7 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // Import FullCalend
     DemandeEquipementComponent,
     AdminNotificationsComponent,
     ListedemandeComponent,
+    DeplacementComponent,
 
     
     

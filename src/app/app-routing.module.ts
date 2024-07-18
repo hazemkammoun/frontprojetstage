@@ -24,6 +24,7 @@ import { DemandeEquipementComponent } from './demande-equipement/demande-equipem
 import { ReserverSalleComponent } from './reserver-salle/reserver-salle.component';
 import { AdminNotificationsComponent } from './admin-notifications/admin-notifications.component';
 import { ListedemandeComponent } from './listedemande/listedemande.component';
+import { DeplacementComponent } from './deplacement/deplacement.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent},
       { path: 'gallerie', component: GallerieComponent},
       { path: 'acceuil', component: AcceuilcnstnComponent},
+      { path: 'deplacement',component : DeplacementComponent},
       { path: '', redirectTo: "acceuil", pathMatch: "full" },
      
        // Redirection vers acceuilcnstn
