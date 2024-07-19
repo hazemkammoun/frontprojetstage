@@ -9,27 +9,27 @@
     
             <div class="form-group">
                 <label>في نطاق المهام الموكلة للمؤسسة وفي إطار أنشطتها، يتقدم/تتقدم بطلب للسيد:</label>
-                <input type="text" name="request_to">
+                <input type="text" name="nom"[(ngModel)]="newdeplacement.nom">
             </div>
     
             <div class="form-group">
                 <label>الصفة:</label>
-                <input type="text" name="position">
+                <input type="text" name="fonction" [(ngModel)]="newdeplacement.fonction">
             </div>
     
             <div class="form-group">
                 <label>المصلحة/الوحدة:</label>
-                <input type="text" name="department">
+                <input type="text" name="service" [(ngModel)]="newdeplacement.service">
             </div>
     
            
             <div class="form-group">
                 <label>الإدارة:</label>
-                <input type="text" name="administration">
+                <input type="text" name="direction" [(ngModel)]="newdeplacement.direction">
             </div>
             <div class="form-group">
                 <label>الإدارة الفرعية :</label>
-                <input type="text" name="sous_direction">
+                <input type="text" name="sous_direction" [(ngModel)]="newdeplacement.sous_direction">
             </div>
             <div class="form-group">
                 <label>من السيد المدير العام للمركز الوطني للعلوم والتكنولوجيا نرجو الترخيص له(ها) بالتنقل إلى:</label>
@@ -37,30 +37,31 @@
     
             <div class="form-group">
                 <label>المؤسسة:</label>
-                <input type="text" name="institution">
+                <input type="text" name="instituttion"[(ngModel)]="newdeplacement.instituttion">
             </div>
     
             <div class="form-group">
                 <label>القيام بمهمة تتمثل في (أذكر الغاية بكل دقة):</label>
-                <textarea name="mission_details"></textarea>
+                <textarea name="mission"[(ngModel)]="newdeplacement.mission"></textarea>
             </div>
     
             <div class="form-group">
                 <label>وتدخل في إطار النشاط العادي</label>
-                <input type="checkbox" name="normal_activity">
+                <input type="radio" name="type_mission" value="0" [(ngModel)]="newdeplacement.type_mission">
             </div>
-    
+            
             <div class="form-group">
                 <label>مشروع</label>
-                <input type="checkbox" name="project">
+                <input type="radio" name="type_mission" value="1" [(ngModel)]="newdeplacement.type_mission">
             </div>
+            
             <div class="form-group">
                 <label>أذكره:</label>
-                <textarea name="description_mission"></textarea>
+                <textarea name="description_mission"  [(ngModel)]="newdeplacement.description_mission"></textarea>
             </div>
             <div class="form-group">
                 <label>إتفاقية شراكة مع المحيط (أذكر موضوعها والمؤسسة المعنية):</label>
-                <textarea name="partnership_details"></textarea>
+                <textarea name="activite" [(ngModel)]="newdeplacement.activite"></textarea>
             </div>
             <div class="form-group">
                 <label>و ذلك</label>
@@ -68,38 +69,38 @@
             </div>
             <div class="form-group">
                 <label for="exampleDatepicker1">يوم:</label>
-                <input type="date" class="form-control" id="exampleDatepicker1" name="day">
+                <input type="date" class="form-control" id="exampleDatepicker1" name="date_debut" [(ngModel)]="newdeplacement.date_debut">
               </div>
               <div class="form-group">
                 <label for="departureTime">ساعة الإنطلاق من المركز:</label>
-                <input type="time" class="form-control" id="departureTime" name="departure_time">
+                <input type="date" class="form-control" id="departureTime" name="heure_depart1" [(ngModel)]="newdeplacement.heure_depart1" >
               </div>
     
           
     
               <div class="form-group">
                 <label for="returnTime">ساعة الرجوع المحتملة:</label>
-                <input type="time" class="form-control" id="returnTime" name="return_time">
+                <input type="date" class="form-control" id="returnTime" name="heure_arrive1" [(ngModel)]="newdeplacement.heure_arrive1">
               </div>
               
             <div class="form-group">
                 <label>أيام:</label>
-                <input type="text" name="days">
+                <input type="date" name="date_fin" [(ngModel)]="newdeplacement.date_fin">
             </div>
             <div class="form-group">
                 <label for="returnTime2">ساعة الرجوع المحتملة:</label>
-                <input type="time" class="form-control" id="returnTime2" name="return_time_2">
+                <input type="date" class="form-control" id="returnTime2" name="heure_depart2" [(ngModel)]="newdeplacement.heure_depart2">
               </div>
-            <label>و يستعمل للغرض:</label>
+              <label>و يستعمل للغرض:</label>
               <div class="form-group">
-                <label>سيارة خاصة</label>
-                <input type="checkbox" name="private_car">
-            </div>
-            <div class="form-group">
-                <label>سيارة إدارية</label>
-                <input type="checkbox" name="administrative_car">
-            </div>
-    
+                  <label>سيارة خاصة</label>
+                  <input type="radio" name="but" value="0" [(ngModel)]="newdeplacement.but">
+              </div>
+              <div class="form-group">
+                  <label>سيارة إدارية</label>
+                  <input type="radio" name="but" value="1" [(ngModel)]="newdeplacement.but">
+              </div>
+              
             <div class="form-group signature">
                 <label>إمضاء صاحب الطلب:</label>
                 <input type="text" name="signature">
@@ -109,10 +110,18 @@
                 <label>سيدي ثابت في:</label>
                 <input type="text" name="location">
             </div>
+  <div class="form-group">
+        <label for="userSelect">اختيار المستخدم:</label>
+        <select id="userSelect" name="user" [(ngModel)]="newdeplacement.utilisateur" class="form-control">
+          <option *ngFor="let user of lesutilisateurs" [ngValue]="user"  >{{ user.nom }}</option>
+        </select>
+      </div>
+
+
         </form>
     </div>
     <div class="d-grid gap-2 d-md-block">
-     <button class="btn btn-primary" type="submit">Send</button>
+     <button class="btn btn-primary" type="submit" (click)="adddeplacement()">Send</button>
         &nbsp;
         <button class="btn btn-primary" type="reset">Cancel</button>
       </div>

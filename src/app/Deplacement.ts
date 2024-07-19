@@ -1,10 +1,12 @@
+import { Utilisateur } from "./Utilisateur";
+
 export class Deplacement{
 
     id?: number;
 	nom?: String;
 	fonction?: String;
 	service?: String;
-    Direction?: String;
+    direction?: String;
     sous_direction?: String;
     instituttion?: String;
     mission?: String;
@@ -19,6 +21,7 @@ export class Deplacement{
     heure_arrive2?:Date;
     but?:number;
     date_premier_signature?:Date;
+    utilisateur? : Utilisateur;
 }
 
 
