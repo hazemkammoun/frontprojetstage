@@ -24,6 +24,7 @@ export class LoginComponent {
     console.log(this.formLogin.value);
     let username=this.formLogin.value.username;
     let pwd=this.formLogin.value.password;  
+    
     this.authService.login(username,pwd).subscribe({
       next:data=>{
      this.authService.loadProfile(data);

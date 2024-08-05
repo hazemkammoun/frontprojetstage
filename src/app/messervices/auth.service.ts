@@ -16,12 +16,13 @@ export class AuthService {
  accessToken!:any;
 
   constructor(private http :HttpClient, private router :Router) { }
-  public login(username:string,password:string){
+  public login(prenom:string,password:string){
     let options ={
       headers:new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded")
      
     }
-    let params =new HttpParams().set("username",username).set("password",password);
+    
+    let params =new HttpParams().set("prenom",prenom).set("password",password);
     return this.http.post("http://localhost:8080/auth/login",params,options)
   } 
   loadProfile(data : any){
@@ -45,7 +46,10 @@ this.isAuthenticated=true;
     }
   }
   register(user: Utilisateur): Observable<Utilisateur>{
-    return this.http.post("http://localhost:8080/users/register",user);
+    console.log(user)
+    console.log("im in register")
+    return this.http.post("http://localhost:8080/auth/register",user);
+  
   }
  
 }

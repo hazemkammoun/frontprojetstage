@@ -16,7 +16,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     console.log("*****")
     console.log(request.url);
-    if (request.url.includes('http://localhost:8080/users/register')) {
+    if (request.url.includes('http://localhost:8080/auth/register')) {
       // If it matches, skip intercepting and forward the request directly
       return next.handle(request);
     }

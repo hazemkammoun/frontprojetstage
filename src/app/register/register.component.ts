@@ -16,22 +16,23 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.formRegister = this.formBuilder.group({
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      cin: ['', Validators.required],
-      matricule: ['', Validators.required],
-      poste: ['', Validators.required],
-      email: ['User', [Validators.required, Validators.email]],
-      adresse: ['', Validators.required],
-      telephone: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      nom: [''],
+      prenom: [''],
+      cin: [''],
+      matricule: [''],
+      poste: [''],
+      email: ['User'],
+      adresse: [''],
+      telephone: [''],
+      password: [''],
+      confirmPassword: ['']
     });
   }
 
   inscrire() {
     this.authService.register(this.formRegister.value).subscribe(
       data => {
+        console.log("hellooooooooooooo");
         console.log(data);
         // Handle successful registration here
         this.router.navigateByUrl("login")
