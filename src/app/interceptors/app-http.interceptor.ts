@@ -20,7 +20,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
       // If it matches, skip intercepting and forward the request directly
       return next.handle(request);
     }
-    if(!request.url.includes("/auth/login")){
+    if(!request.url.includes("http://localhost:8080/auth/login")){
       let newRequest = request.clone({
         headers: request.headers.set('Authorization', 'Bearer ' + this.authService.accessToken)
       })

@@ -12,31 +12,31 @@ export class AuthService {
   
   isAuthenticated:boolean=false;
  public roles:any; 
- username:any;
+ prenom:any;
  accessToken!:any;
 
   constructor(private http :HttpClient, private router :Router) { }
-  public login(prenom:string,password:string){
-    let options ={
-      headers:new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded")
-     
-    }
-    
-    let params =new HttpParams().set("prenom",prenom).set("password",password);
-    return this.http.post("http://localhost:8080/auth/login",params,options)
-  } 
+  public login(prenom: string, password: string) {
+    const headers = new HttpHeaders().set("Content-Type", "application/json");
+    const body = { prenom, password };
+    return this.http.post("http://localhost:8080/auth/login", body, { headers });
+  }
   loadProfile(data : any){
+    console.log("in load")
 this.isAuthenticated=true;
-    this.accessToken = data['access-token'];
+    this.accessToken = data['accessToken'];
+    console.log(data)
     let decodedJwt:any=jwtDecode(this.accessToken);
-    this.username=decodedJwt.sub;
+    console.log(decodedJwt)
+    this.prenom=decodedJwt.sub;
     this.roles=decodedJwt.scope;
     window.localStorage.setItem("accessToken",this.accessToken);  
     console.log(this.roles);
 
   }
   logout(){
-    window.localStorage.setItem("accessToken",'');  
+  this.isAuthenticated=false;
+    window.localStorage.removeItem("accessToken");
   }
   loadUserfromLocalStorage() {
     let token =window.localStorage.getItem("accessToken");

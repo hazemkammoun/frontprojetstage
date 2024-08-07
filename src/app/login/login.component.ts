@@ -15,25 +15,30 @@ export class LoginComponent {
   // tslint:disable-next-line:typedef 
   ngOnInit(): void{
   this.formLogin=this.fb.group({
-  username:this.fb.control(""),
+  prenom:this.fb.control(""),
   password:this.fb.control("")
 })
   }
 
   handleLogin(){
+    console.log("res1")
     console.log(this.formLogin.value);
-    let username=this.formLogin.value.username;
+    console.log("*****")
+    let prenom=this.formLogin.value.prenom;
+
     let pwd=this.formLogin.value.password;  
     
-    this.authService.login(username,pwd).subscribe({
+    this.authService.login(prenom,pwd).subscribe({
+    
       next:data=>{
      this.authService.loadProfile(data);
      this.router.navigateByUrl("/admin");
 
       },
       error:err=>{
+        console.log("eror1")
         console.log(err);
-
+        console.log("eror")
       }
 
     })
